@@ -1,0 +1,9 @@
+﻿edges,nodes,weight,misc_properties
+A,a,5.0,{}
+A,b,1.0,{}
+B,b,3.0,{}
+A,c,1.0,{}
+C,c,0.4,{}
+B,d,1.0,{}
+C,d,1.0,{}
+D,d,1.0,{}
