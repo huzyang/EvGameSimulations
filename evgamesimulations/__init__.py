@@ -1,1 +1,1 @@
-from .core import hmm
+from .core_console_simulation import hmm
