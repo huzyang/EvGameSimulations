@@ -8,22 +8,12 @@ import numpy as np
 import pandas as pd
 import copy
 
-
 class MoneyAgent(mesa.Agent):
     """An agent with fixed initial wealth."""
 
     def __init__(self, unique_id, model):
-        # Pass the parameters to the parent class.
-        # super().__init__(unique_id, model)
-        super().__init__(model)
-
-        # Create the agent's variable and set the initial values.
+        super().__init__(unique_id, model)
         self.wealth = 1
-
-    def step(self):
-        self.move()
-        if self.wealth > 0:
-            self.give_money()
 
     def move(self):
         possible_steps = self.model.grid.get_neighborhood(
@@ -35,6 +25,11 @@ class MoneyAgent(mesa.Agent):
     def give_money(self):
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
         if len(cellmates) > 1:
-            other = self.random.choice(cellmates)
-            other.wealth += 1
+            other_agent = self.random.choice(cellmates)
+            other_agent.wealth += 1
             self.wealth -= 1
+
+    def step(self):
+        self.move()
+        if self.wealth > 0:
+            self.give_money()

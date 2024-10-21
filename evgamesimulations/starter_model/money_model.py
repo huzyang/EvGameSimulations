@@ -11,22 +11,19 @@ from money_agent import MoneyAgent
 # Data manipulation and analysis.
 import pandas as pd
 
-
 class MoneyModel(mesa.Model):
     """A model with some number of agents."""
 
     def __init__(self, N, width, height):
         super().__init__()
         self.num_agents = N
-        # Create a grid of size width x height
+        # Create a MultiGrid with the given width and height.
         self.grid = mesa.space.MultiGrid(width, height, True)
         self.schedule = mesa.time.RandomActivation(self)
-
         # Create agents
         for i in range(self.num_agents):
             a = MoneyAgent(i, self)
             self.schedule.add(a)
-
             # Add the agent to a random grid cell
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
